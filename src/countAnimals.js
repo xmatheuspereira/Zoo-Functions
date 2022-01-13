@@ -30,4 +30,3 @@ module.exports = countAnimals;
 
         Contei com a ajuda do Yuri Carvalho para entendimento do problema proposto.
 */
-
