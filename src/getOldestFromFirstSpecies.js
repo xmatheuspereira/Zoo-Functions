@@ -1,21 +1,23 @@
-const { animal } = require('faker/locale/zh_TW');
 const data = require('../data/zoo_data');
 
 const { employees, species } = data;
 
 function getOldestFromFirstSpecies(id) {
-  const employee = employees.find((employee) => employee.id === id);
-  const firstSpecies = employee.responsibleFor[0];
+  const functionary = employees.find((employee) => employee.id === id);
+  const firstSpecies = functionary.responsibleFor[0];
   const animalName = species.find((animal) => animal.id === firstSpecies).residents;
 
-  const sorted = animalName.sort(function (a, b) {
-    return a.age < b.age ? 1 : a.age > b.age ? -1 : 0
+  const sorted = animalName.sort((a, b) => {
+    if (a.age < b.age) {
+      return 1;
+    }
+    if (a.age > b.age) {
+      return -1;
+    }
+    return 0;
   });
 
   return sorted.map(({ name, sex, age }) => [name, sex, age])[0];
 }
 
 module.exports = getOldestFromFirstSpecies;
-
-// Primeiro procurar pela primeira especie gerenciada pelo funcionario (employess)
-// Segundo retornar array com nome, sexo e idade do animal mais velho da especie
