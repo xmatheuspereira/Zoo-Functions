@@ -1,8 +1,8 @@
 const { species, hours } = require('../data/zoo_data');
 const data = require('../data/zoo_data');
 
-const animaisArray = species.map((animal) => animal.name);
-const diasArray = Object.keys(hours);
+const animals = species.map((animal) => animal.name);
+const days = Object.keys(hours);
 
 function getValueObj(day) {
   let message = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
@@ -16,13 +16,13 @@ function getValueObj(day) {
 }
 
 function getSchedule(scheduleTarget) {
-  if (diasArray.includes(scheduleTarget)) {
+  if (days.includes(scheduleTarget)) {
     return getValueObj(scheduleTarget);
   }
-  if (animaisArray.includes(scheduleTarget)) {
+  if (animals.includes(scheduleTarget)) {
     return species.find(({ name }) => name === scheduleTarget).availability;
   }
-  return diasArray.reduce((acc, day) => ({ ...acc, ...getValueObj(day) }), {});
+  return days.reduce((acc, day) => ({ ...acc, ...getValueObj(day) }), {});
 }
 
 module.exports = getSchedule;
